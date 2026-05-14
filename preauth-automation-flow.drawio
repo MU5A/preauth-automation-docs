@@ -1,0 +1,229 @@
+<mxfile host="app.diagrams.net" modified="2026-05-14T11:45:00.000Z" agent="OpenClaw" version="21.0.0">
+  <diagram name="Pre-Auth Automation Flow" id="preauth-flow">
+    <mxGraphModel dx="1434" dy="836" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Title -->
+        <mxCell id="title" value="Pre-Authorization Automation Workflow" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;fontStyle=1;fontColor=#1a365d;" vertex="1" parent="1">
+          <mxGeometry x="284" y="20" width="600" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="subtitle" value="AI-Assisted Authorization Layer (Pilot Phase)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=2;fontColor=#4a5568;" vertex="1" parent="1">
+          <mxGeometry x="384" y="55" width="400" height="25" as="geometry" />
+        </mxCell>
+        
+        <!-- Provider Box -->
+        <mxCell id="provider" value="👨‍⚕️&#xa;PROVIDER" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#3b82f6;strokeWidth=2;fontSize=14;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="80" y="180" width="120" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Step 1 Label -->
+        <mxCell id="step1" value="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#3b82f6;strokeColor=#1e40af;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="195" width="30" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Existing System Box -->
+        <mxCell id="existing-system" value="YOUR EXISTING SYSTEM&#xa;&#xa;(Portal / Platform / Process)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e5e7eb;strokeColor=#6b7280;strokeWidth=2;fontSize=12;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="280" y="160" width="180" height="100" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow: Provider to Existing System -->
+        <mxCell id="arrow1" value="Submits&#xa;Pre-Auth Request" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3b82f6;strokeWidth=2;fontSize=10;fontStyle=1;" edge="1" parent="1" source="provider" target="existing-system">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Step 2 Label -->
+        <mxCell id="step2" value="2" style="ellipse;whiteSpace=wrap;html=1;fillColor=#3b82f6;strokeColor=#1e40af;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="475" y="195" width="30" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Integration Layer -->
+        <mxCell id="integration" value="⚡ WEBHOOK /&#xa;API INTEGRATION" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#fef3c7;strokeColor=#f59e0b;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="175" width="130" height="70" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow: Existing System to Integration -->
+        <mxCell id="arrow2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#f59e0b;strokeWidth=2;" edge="1" parent="1" source="existing-system" target="integration">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Step 3 Label -->
+        <mxCell id="step3" value="3" style="ellipse;whiteSpace=wrap;html=1;fillColor=#3b82f6;strokeColor=#1e40af;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="130" width="30" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Automation System Container -->
+        <mxCell id="automation-container" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0fdf4;strokeColor=#22c55e;strokeWidth=3;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="100" width="400" height="280" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="automation-title" value="🤖 AUTOMATION SERVICE" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#15803d;" vertex="1" parent="1">
+          <mxGeometry x="800" y="110" width="200" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Automation Steps -->
+        <mxCell id="auto1" value="📋 Extract Request Details" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#22c55e;fontSize=11;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="720" y="150" width="160" height="35" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="auto2" value="✓ Check Plan &amp; Eligibility" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#22c55e;fontSize=11;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="720" y="195" width="160" height="35" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="auto3" value="📜 Validate Against Policy/Rules" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#22c55e;fontSize=11;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="720" y="240" width="160" height="35" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="auto4" value="📊 Review Utilization History" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#22c55e;fontSize=11;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="720" y="285" width="160" height="35" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="auto5" value="🎯 Generate Recommendation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bbf7d0;strokeColor=#16a34a;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="330" width="160" height="35" as="geometry" />
+        </mxCell>
+        
+        <!-- Decision Diamond -->
+        <mxCell id="decision" value="DECISION" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fef9c3;strokeColor=#eab308;strokeWidth=2;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="210" width="100" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Decision Outcomes -->
+        <mxCell id="approve" value="✅ APPROVE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#22c55e;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="160" width="90" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="decline" value="❌ DECLINE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fee2e2;strokeColor=#ef4444;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="230" width="90" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="escalate" value="⚠️ ESCALATE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#f59e0b;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="300" width="90" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrows from Decision -->
+        <mxCell id="arr-approve" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22c55e;strokeWidth=2;" edge="1" parent="1" source="decision" target="approve">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-decline" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ef4444;strokeWidth=2;" edge="1" parent="1" source="decision" target="decline">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-escalate" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#f59e0b;strokeWidth=2;" edge="1" parent="1" source="decision" target="escalate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow: Integration to Automation -->
+        <mxCell id="arrow3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22c55e;strokeWidth=2;" edge="1" parent="1" source="integration" target="auto1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Vertical arrows between auto steps -->
+        <mxCell id="arr-auto1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22c55e;strokeWidth=1;" edge="1" parent="1" source="auto1" target="auto2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-auto2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22c55e;strokeWidth=1;" edge="1" parent="1" source="auto2" target="auto3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-auto3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22c55e;strokeWidth=1;" edge="1" parent="1" source="auto3" target="auto4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-auto4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22c55e;strokeWidth=1;" edge="1" parent="1" source="auto4" target="auto5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-auto5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22c55e;strokeWidth=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="auto5" target="decision">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="900" y="347" />
+              <mxPoint x="900" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Step 4 Label -->
+        <mxCell id="step4" value="4" style="ellipse;whiteSpace=wrap;html=1;fillColor=#3b82f6;strokeColor=#1e40af;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="475" y="450" width="30" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Return Path -->
+        <mxCell id="return-box" value="📤 RESULT RETURNED&#xa;&#xa;• Database Update&#xa;• API Response&#xa;• Workflow Status Update" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ede9fe;strokeColor=#8b5cf6;strokeWidth=2;fontSize=11;fontStyle=0;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="520" y="420" width="180" height="90" as="geometry" />
+        </mxCell>
+        
+        <!-- Existing System Updated -->
+        <mxCell id="existing-updated" value="YOUR EXISTING SYSTEM&#xa;&#xa;(Updated with Result)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e5e7eb;strokeColor=#6b7280;strokeWidth=2;fontSize=12;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="280" y="420" width="180" height="90" as="geometry" />
+        </mxCell>
+        
+        <!-- Human Team Box -->
+        <mxCell id="human-team" value="👥 YOUR AUTHORIZATION TEAM&#xa;&#xa;Handles:&#xa;• High-risk cases&#xa;• Unclear requests&#xa;• Policy exceptions&#xa;• Escalations" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#3b82f6;strokeWidth=2;fontSize=11;fontStyle=0;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="80" y="400" width="170" height="130" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrows for return flow -->
+        <mxCell id="arr-return1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b5cf6;strokeWidth=2;" edge="1" parent="1" source="return-box" target="existing-updated">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arr-return2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6b7280;strokeWidth=2;" edge="1" parent="1" source="existing-updated" target="human-team">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Curved arrow from outcomes back to return -->
+        <mxCell id="arr-back" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b5cf6;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="decline" target="return-box">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1085" y="465" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Key Benefits Box -->
+        <mxCell id="benefits" value="✨ KEY BENEFITS&#xa;&#xa;✓ Minimal disruption to infrastructure&#xa;✓ No changes to existing workflows&#xa;✓ Faster turnaround time&#xa;✓ Human team stays in control&#xa;✓ Handles repetitive validation automatically" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#94a3b8;strokeWidth=1;fontSize=11;fontStyle=0;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="800" y="420" width="280" height="130" as="geometry" />
+        </mxCell>
+        
+        <!-- Legend -->
+        <mxCell id="legend-title" value="LEGEND" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=1;fontColor=#374151;" vertex="1" parent="1">
+          <mxGeometry x="80" y="560" width="60" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="leg1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#3b82f6;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="80" y="585" width="20" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="leg1-text" value="Your Team / Provider" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="105" y="582" width="110" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="leg2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e5e7eb;strokeColor=#6b7280;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="220" y="585" width="20" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="leg2-text" value="Existing System" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="245" y="582" width="90" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="leg3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0fdf4;strokeColor=#22c55e;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="340" y="585" width="20" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="leg3-text" value="Automation Service" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="365" y="582" width="110" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="leg4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#f59e0b;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="480" y="585" width="20" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="leg4-text" value="Integration Layer" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="505" y="582" width="100" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="leg5" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ede9fe;strokeColor=#8b5cf6;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="610" y="585" width="20" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="leg5-text" value="Return Path" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="635" y="582" width="80" height="20" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
