@@ -1,176 +1,195 @@
 # PA-005: AMAN Field Clarification Request
 
-**Status:** PENDING AMAN RESPONSE  
+**Status:** ✅ PARTIALLY RESOLVED  
 **Created:** 2026-06-02  
-**Priority:** BLOCKER — Agent decisions paused until resolved
+**Updated:** 2026-06-06  
+**Priority:** MEDIUM — Core mappings confirmed, some items still pending
 
 ---
 
-## Context
+## Responses from AMAN
 
-We are stabilizing the AMAN HMO pre-authorization webhook intake pipeline before resuming automated decisions. We need AMAN to confirm field mappings and semantics to ensure correct interpretation of payloads.
+### ✅ CONFIRMED (2026-06-01, via Sakeenah)
+
+#### Status Fields
+| Field | Value | Meaning |
+|-------|-------|---------|
+| `enrollee.status` | 1 | Active |
+| `enrollee.status` | 0 | Inactive |
+| `policy.policy_status` | 1 | Active |
+| `policy.policy_status` | 0 | Inactive |
+
+#### PA Item Status (`pa_items.status`)
+| Value | Meaning |
+|-------|---------|
+| 0 | Pending |
+| 1 | Approved |
+| 2 | Queried |
+| 3 | Rejected |
+
+#### Request Categories (`pa_items.category_id`)
+| ID | Category |
+|----|----------|
+| 1 | Drugs and consumables |
+| 2 | Services and procedures |
+| 3 | Laboratory investigations |
+| 4 | Radiological investigations |
+| 5 | Dental care |
+| 6 | Optical care |
+| 7 | Immunization and vaccine |
+| 8 | Wellness |
+
+#### Care Types (`encounter.care_type`)
+| ID | Care Type |
+|----|-----------|
+| 1 | Inpatient |
+| 2 | Outpatient |
+| 3 | Antenatal |
+| 4 | Dental Care |
+| 5 | Optical care |
+| 6 | Telemedicine |
+| 7 | Wellness |
+
+#### Empty Consumption Limits
+When `consumption.enrollee_limits` and `consumption.policy_limits` are empty arrays:
+- **Treat as:** Limits not configured (not "unlimited" or "unavailable")
 
 ---
 
-## Questions for AMAN
+### ⏳ PENDING (2026-06-03, via Sakeenah/Imran)
 
-### 1. Status Fields
+#### `limit_definition_id` Mapping
+- Sakeenah confirmed a mapping exists and will provide it
+- Still waiting for the mapping table
+- Example IDs seen: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 16, 17, 18, 19, 20
+
+**Sample limit object:**
+```json
+{
+  "period": "annual",
+  "target_id": null,
+  "unit_label": "₦",
+  "limit_value": 2100000,
+  "metric_name": "Amount",
+  "metric_type": "monetary",
+  "target_type": "plan",
+  "consumed_value": 0,
+  "remaining_value": 2100000,
+  "limit_definition_id": 11
+}
+```
+
+#### Final Decision Webhook
+- Mo requested a webhook/endpoint to see final AMAN decisions for QA comparison
+- Imran: "This is noted and will be reviewed. You will be notified when/if it's available."
+
+---
+
+## Original Questions
+
+### 1. Status Fields ✅ RESOLVED
 
 **Q1.1:** What are all possible values for `enrollee.status`?  
-- We currently see `1` — does `1` always mean active/eligible?  
-- What other values exist (e.g., `0`, `2`, strings like `"inactive"`)?
+**A:** `1` = active, `0` = inactive
 
 **Q1.2:** What are all possible values for `policy.policy_status`?  
-- Same question — does `1` always mean active?  
-- What indicates suspended, expired, cancelled, etc.?
+**A:** `1` = active, `0` = inactive
 
 ---
 
-### 2. Category & Type Mappings
+### 2. Category & Type Mappings ✅ RESOLVED
 
 **Q2.1:** What is the official mapping for `pa_items.category_id`?  
-Our current assumption:
-```
-1 = Drugs and consumables
-2 = Services and procedures
-3 = Laboratory investigations
-4 = Radiological investigations
-5 = Dental care
-6 = Optical care
-7 = Immunization and vaccine
-8 = Wellness
-```
-**Please confirm or correct.**
+**A:** See table above — confirmed correct.
 
 **Q2.2:** What is the official mapping for `encounter.care_type`?  
-Our current assumption:
-```
-1 = Inpatient
-2 = Outpatient
-3 = Antenatal
-4 = Dental Care
-5 = Optical care
-6 = Telemedicine
-7 = Wellness
-```
-**Please confirm or correct.**
+**A:** See table above — confirmed correct.
 
-**Q2.3:** Should we rely on `checkin_type` text (e.g., `"Out-patient"`, `"Telemedicine"`) or `care_type` number for clinical workflow classification?
+**Q2.3:** Should we rely on `checkin_type` text or `care_type` number?  
+**A:** Not explicitly answered. We use `care_type` number with text as fallback.
 
 ---
 
-### 3. PA Identity & Event Updates
+### 3. PA Identity & Event Updates ⚠️ NOT YET ASKED
 
-**Q3.1:** Should `encounter.checkin_id` be treated as the main PA/encounter identifier?
-
-**Q3.2:** When the same `checkin_id` appears multiple times with different `event_id` values, what does this mean?
-- Additional items being added to an existing PA?
-- An edited/amended request?
-- A full replacement snapshot that supersedes prior events?
-
-**Q3.3:** Should the latest payload replace prior context entirely, or should we merge all payloads for the same `checkin_id`?
+Still need clarification on:
+- `checkin_id` as main PA identifier
+- Multiple events for same `checkin_id`
+- Merge vs replace semantics
 
 ---
 
-### 4. Item Identifiers & Decisioning
+### 4. Item Identifiers & Decisioning ⚠️ NOT YET ASKED
 
-**Q4.1:** Which identifier should we use when referring to or deciding on a specific item?
-- `claim_item_id`
-- `facility_tariff_item_id`
-- `submission.items_added.id`
-
-**Q4.2:** Is `pa_items` the **full current PA item set** (all items in the request)?
-
-**Q4.3:** Is `submission.items_added` **only the newly added items** for that specific event?
-
-**Q4.4:** Which cost field is authoritative for decisioning?
-- `pa_items.requested_cost`
-- `pa_items.unit_cost * quantity`
-- `submission.items_added.requested_cost`
+Still need clarification on:
+- Primary item identifier to use
+- `pa_items` vs `submission.items_added` scope
+- Authoritative cost field
 
 ---
 
-### 5. Item Counts
+### 5. Item Counts ⚠️ NOT YET ASKED
 
-**Q5.1:** What exactly does `encounter.item_counts.pending` represent?
-
-**Q5.2:** Why does `item_counts.pending` sometimes differ from the number of items in `pa_items` with `status: "pending"`?
-
----
-
-### 6. Consumption & Limits
-
-**Q6.1:** What does it mean when `consumption.enrollee_limits` and `consumption.policy_limits` are empty arrays?
-- No limits apply to this member?
-- Limits data is unavailable/not loaded?
-- Limits are not configured for this plan?
-
-**Q6.2:** What is the official mapping for `limit_definition_id`?  
-We see IDs like `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `16`, `17`, `18`, `19`, `20`.  
-What does each ID represent (e.g., Outpatient, Inpatient, Dental, Optical)?
-
-**Q6.3:** Are limits already enforced/checked before the payload is sent to us, or is enforcement our responsibility?
+Still need clarification on:
+- `item_counts.pending` semantics
+- Why counts sometimes don't match item array
 
 ---
 
-### 7. Proposed Impact
+### 6. Consumption & Limits ⏳ PARTIALLY RESOLVED
 
-**Q7.1:** What does `proposed_impact.status = "allowed"` mean?
-- Is it an advisory signal only?
-- Should it influence our approve/reject decisions?
+**Q6.1:** Empty limits meaning?  
+**A:** ✅ Treat as "limit not configured"
 
-**Q7.2:** Under what cases will `proposed_impact.violations` be populated?
+**Q6.2:** `limit_definition_id` mapping?  
+**A:** ⏳ Sakeenah will provide — still waiting
 
----
-
-### 8. Comments & Operational Notes
-
-**Q8.1:** Should `submission.comment` and `pa_comments` be treated as required review context?
-
-**Q8.2:** Are PA comments usually provider notes, AMAN reviewer notes, or both?
-
-**Q8.3:** Should any request with comments be automatically escalated for human review?
+**Q6.3:** Pre-enforcement by AMAN?  
+**A:** Not answered
 
 ---
 
-### 9. Manual Pricing & Tariff Issues
+### 7-10. Other Questions ⚠️ NOT YET ASKED
 
-**Q9.1:** What does `pricing_source = "manual"` mean operationally?
-- Item not in facility tariff?
-- Manually entered price?
-- Something else?
-
-**Q9.2:** Should manual-priced items be treated normally, or should they be escalated?
-
-**Q9.3:** How should we handle comments mentioning "tariff issue" or "portal issue"?
+These remain unanswered:
+- Proposed impact semantics
+- Comment handling rules
+- Manual pricing treatment
+- Decision workflow rules
 
 ---
 
-### 10. Decision Workflow & Rules
+## Implementation Status
 
-**Q10.1:** What are AMAN's exact approval, rejection, and escalation rules we should follow?
+### Applied to Code ✅
+- `agent/agent.py` updated with confirmed mappings:
+  - `CARE_TYPE_BUCKETS` — care_type → bucket mapping
+  - `CATEGORY_BUCKET_OVERRIDES` — category_id → bucket mapping
+  - `CATEGORY_LABELS` — category_id → display name
+  - `CARE_TYPE_LABELS` — care_type → display name
+  - `_item_status()` — already had correct 0/1/2/3 mapping
 
-**Q10.2:** Which cases should **never** be auto-approved (always require human review)?
-
-**Q10.3:** Which cases should **always** be escalated to AMAN staff?
+### Still Needed
+- [ ] `limit_definition_id` mapping from AMAN
+- [ ] Final decision webhook from AMAN (for QA comparison)
 
 ---
 
-## Response Instructions
+## Timeline
 
-Please provide responses in this format:
-
-```
-## Q1.1 Response
-[Your answer]
-
-## Q1.2 Response
-[Your answer]
-
-...
-```
-
-Or provide a comprehensive mapping document if available.
+| Date | Event |
+|------|-------|
+| 2026-06-01 | Mo sent clarification questions to AMAN group |
+| 2026-06-01 | Sakeenah responded with status, category, care_type mappings |
+| 2026-06-03 | Mo asked about `limit_definition_id` mapping |
+| 2026-06-03 | Sakeenah: "I'll get it for you and revert" |
+| 2026-06-03 | Imran confirmed `limit_definition_id` is the limit definition object ID |
+| 2026-06-04 | Sakeenah confirmed receiving AI recommendations |
+| 2026-06-04 | Mo requested final decision data for QA |
+| 2026-06-04 | Imran: "will be reviewed, you will be notified" |
+| 2026-06-05 | Sakeenah left first comment on dashboard |
+| 2026-06-05 | Mo replied to comment for PA CH/2026/06/04/0014602 |
+| 2026-06-06 | Mappings applied to codebase |
 
 ---
 
@@ -181,4 +200,4 @@ Pre-Auth Automation Integration
 
 ---
 
-*These answers will be documented in our integration specification (PA-005) and used to configure the automated decision pipeline.*
+*Last updated: 2026-06-06*
