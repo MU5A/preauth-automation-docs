@@ -2,7 +2,7 @@
 
 **Status:** ✅ PARTIALLY RESOLVED  
 **Created:** 2026-06-02  
-**Updated:** 2026-06-06  
+**Updated:** 2026-06-10  
 **Priority:** MEDIUM — Core mappings confirmed, some items still pending
 
 ---
@@ -82,6 +82,29 @@ When `consumption.enrollee_limits` and `consumption.policy_limits` are empty arr
 #### Final Decision Webhook
 - Mo requested a webhook/endpoint to see final AMAN decisions for QA comparison
 - Imran: "This is noted and will be reviewed. You will be notified when/if it's available."
+
+---
+
+### ✅ CONFIRMED (2026-06-10, via Imran)
+
+#### PA Event Model — Critical Clarification
+
+| Level | Event Type | Meaning |
+|-------|------------|---------|
+| **PA level** | `pa.approved` | PA request was received and processed |
+| **Line item level** | N/A (embedded) | Individual item decisions in `line_outcomes[].aman_decisions` |
+
+**Key insight:** There is NO `pa.rejected` event. PAs are always `pa.approved` at the PA level because the event means "we processed your request", not "we approved everything in it."
+
+**Individual item decisions** live inside `line_outcomes[].aman_decisions`:
+- Each line item can be independently approved or rejected
+- Check `pa_items.status` values (0=Pending, 1=Approved, 2=Queried, 3=Rejected)
+- The PA-level event just signals that processing is complete
+
+**Implementation note:** Agent logic should:
+1. Listen for `pa.approved` events
+2. Parse `line_outcomes[].aman_decisions` for actual item-level verdicts
+3. Never wait for a `pa.rejected` event (it doesn't exist)
 
 ---
 
@@ -190,6 +213,9 @@ These remain unanswered:
 | 2026-06-05 | Sakeenah left first comment on dashboard |
 | 2026-06-05 | Mo replied to comment for PA CH/2026/06/04/0014602 |
 | 2026-06-06 | Mappings applied to codebase |
+| 2026-06-09 | Imran confirmed webhook delivery working, testing complete |
+| 2026-06-10 | Mo confirmed webhooks arriving reliably |
+| 2026-06-10 | Imran clarified PA event model: no `pa.rejected`, decisions in `line_outcomes[]` |
 
 ---
 
@@ -200,4 +226,4 @@ Pre-Auth Automation Integration
 
 ---
 
-*Last updated: 2026-06-06*
+*Last updated: 2026-06-10*

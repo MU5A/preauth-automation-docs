@@ -2,6 +2,7 @@
 
 **Status:** IN PROGRESS  
 **Created:** 2026-06-02  
+**Updated:** 2026-06-10  
 **Owner:** SaasPro Labs Engineering
 
 ---
@@ -10,10 +11,11 @@
 
 | Component | Status |
 |-----------|--------|
-| AMAN live PA webhook delivery | ✅ Working |
+| AMAN live PA webhook delivery | ✅ Confirmed working (2026-06-10) |
 | Raw payload storage | ✅ Working |
 | Webhook delivery logging | ✅ Implemented |
-| Payload field extraction | ⚠️ Needs AMAN confirmation |
+| Payload field extraction | ✅ Core mappings confirmed |
+| PA event model | ✅ Clarified (no `pa.rejected`, see PA-005) |
 | Agent auto-decisions | 🛑 PAUSED |
 
 ---
@@ -146,4 +148,4 @@ LIMIT 20;
 
 ---
 
-*Last updated: 2026-06-02*
+*Last updated: 2026-06-10*

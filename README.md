@@ -5,6 +5,10 @@ Visual diagrams explaining the AI-assisted pre-authorization workflow.
 ## Files
 
 - **`preauth-automation-flow.drawio`** - Main workflow diagram showing the automation integration
+- **`WEBHOOK-EVENT-MODEL.md`** - AMAN webhook event types and payload structure
+- **`PA-005-AMAN-FIELD-CLARIFICATIONS.md`** - Field mapping reference (status codes, categories, etc.)
+- **`STABILIZATION-PLAN.md`** - Integration status and roadmap
+- **`ROADMAP-Q3-Q4-2026.md`** - Future feature roadmap
 
 ## How to View/Edit
 
